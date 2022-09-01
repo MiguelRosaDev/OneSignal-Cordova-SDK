@@ -237,6 +237,7 @@ var OSNotificationReceivedEvent = {
     create : function (receivedEvent) {
         if (receivedEvent.notification) {
             // Android case
+            console.log('potato');
             this.notification = new OSNotification(receivedEvent.notification);
         } else {
             // iOS case
