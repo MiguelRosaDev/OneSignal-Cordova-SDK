@@ -373,6 +373,7 @@ public class OneSignalPush extends CordovaPlugin {
     private CallbackContext jsNotificationInForegroundCallBack;
 
     public CordovaNotificationInForegroundHandler(CallbackContext inCallbackContext) {
+      Log.e(TAG, "CordovaNotificationInForegroundHandler ok");
       jsNotificationInForegroundCallBack = inCallbackContext;
     }
 
@@ -381,7 +382,7 @@ public class OneSignalPush extends CordovaPlugin {
       try {
         OSNotification notification = notificationReceivedEvent.getNotification();
         notificationReceivedEventCache.put(notification.getNotificationId(), notificationReceivedEvent);
-
+        Log.e(TAG, "notificationWillShowInForeground ok");
         CallbackHelper.callbackSuccess(jsNotificationInForegroundCallBack, notificationReceivedEvent.toJSONObject());
       } catch (Throwable t) {
         t.printStackTrace();
