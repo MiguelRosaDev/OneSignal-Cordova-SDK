@@ -342,10 +342,11 @@ public class OneSignalPush extends CordovaPlugin {
     try {
       String notificationId = data.getString(0);
       boolean shouldDisplay = data.getBoolean(1);
-
+      Log.e(TAG, "completeNotification ok1");
       OSNotificationReceivedEvent notificationReceivedEvent = notificationReceivedEventCache.get(notificationId);
 
       if (notificationReceivedEvent == null) {
+        Log.e(TAG, "completeNotification notificationReceivedEvent null");
         OneSignal.onesignalLog(OneSignal.LOG_LEVEL.ERROR, "Could not find notification completion block with id: " + notificationId);
         return false;
       }
@@ -355,6 +356,7 @@ public class OneSignalPush extends CordovaPlugin {
       else
         notificationReceivedEvent.complete(null);
 
+      Log.e(TAG, "completeNotification ok2");
       return true;
     } catch (JSONException e) {
       e.printStackTrace();
@@ -398,6 +400,7 @@ public class OneSignalPush extends CordovaPlugin {
     @Override
     public void notificationOpened(OSNotificationOpenedResult result) {
       try {
+        Log.e(TAG, "notificationOpened ok");
         if (jsNotificationOpenedCallBack != null)
           CallbackHelper.callbackSuccess(jsNotificationOpenedCallBack, result.toJSONObject());
       } catch (Throwable t) {
