@@ -237,7 +237,7 @@ var OSNotificationReceivedEvent = {
     create : function (receivedEvent) {
         if (receivedEvent.notification) {
             // Android case
-            console.log('potato');
+            console.log('potato 1');
             this.notification = new OSNotification(receivedEvent.notification);
         } else {
             // iOS case
@@ -247,16 +247,18 @@ var OSNotificationReceivedEvent = {
     },
     complete : function (notification) {
         if (!notification) {
+            console.log('potato 2');
             // if the notificationReceivedEvent is null, we want to call the native-side
             // complete/completion with null to silence the notification
             cordova.exec(function(){}, function(){}, "OneSignalPush", "completeNotification", [this.notification.notificationId, false]);
             return;
         }
-
+        
         // if the notificationReceivedEvent is not null, we want to pass the specific event
         // future: Android side: make the notification modifiable
         // iOS & Android: the notification id is associated with the native-side complete handler / completion block
         cordova.exec(function(){}, function(){}, "OneSignalPush", "completeNotification", [this.notification.notificationId, true]);
+        console.log('potato 3');
     },
     getNotification: function() {
         return this.notification; 
